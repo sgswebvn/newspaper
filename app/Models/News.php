@@ -14,4 +14,8 @@ class News extends Model
         'hinh_anh', 'tac_gia',
         'the_loai'
     ];
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
 }

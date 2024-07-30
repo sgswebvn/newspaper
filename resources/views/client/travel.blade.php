@@ -5,16 +5,16 @@
 <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
    <div class="grid grid-cols-12 gap-4">
       <!-- Column 1: Bài viết chính (8/12 width) -->
-      @if(isset($home[0]))
+      @if(isset($travel[0]))
       <div class="col-span-9 border border-blue-200 p-4">
-         <a href="{{ url('/news/details/' . $home[0]->id) }}">
+         <a href="{{ url('/news/details/' . $travel[0]->id) }}">
             <div class="text-center mb-4">
-               <img src="{{ asset($home[0]->hinh_anh) }}" alt="Image" class="w-full h-auto">
+               <img src="{{ asset($travel[0]->hinh_anh) }}" alt="Image" class="w-full h-auto">
             </div>
             <h2 class="text-2xl font-bold text-blue-800">
-            {{ $home[0]->tieu_de }}
+            {{ $travel[0]->tieu_de }}
             </h2>
-            {!! Str::limit($home[0]->noi_dung, 800,  '...') !!}
+            {!! Str::limit($travel[0]->noi_dung, 800,  '...') !!}
 
          </a>
       </div>
@@ -22,7 +22,7 @@
 
       <!-- Column 2: Các bài viết phụ (4/12 width) -->
       <div class="col-span-3 space-y-4">
-         @foreach ($home->slice(1)->take(4) as $keyy)
+         @foreach ($travel->slice(1)->take(4) as $keyy)
          <div class="border border-blue-200 p-4">
             <a href="{{ url('/news/details/' . $keyy->id) }}">
                <img src="{{ asset($keyy->hinh_anh) }}" alt="Image" class="w-full h-48 object-cover mb-2">
@@ -38,9 +38,9 @@
 <br>
 <hr class="my-6 border-gray-300">
 <div class="mx-auto max-w-7xl px-4 lg:px-8">
-   @if(isset($home[0]))
+   @if(isset($travel[0]))
    <strong class="text-xl font-bold text-gray-900">
-   <a href="{{ url('/news/details/' . $home[0]->id) }}">
+   <a href="{{ url('/news/details/' . $travel[0]->id) }}">
    TIN MỚI NHẤT
    </a> 
    </strong>
@@ -52,7 +52,7 @@
 
 @section('main')
 <div class="max-w-7xl mx-auto px-4 lg:px-8">
-   @foreach ($news_home as $key)
+   @foreach ($news_travel as $key)
    <div class="flex border border-gray-200 p-4 mb-4">
       <img src="{{ asset($key->hinh_anh) }}" class="w-32 h-32 object-cover mr-4" alt="Image">
       <div>

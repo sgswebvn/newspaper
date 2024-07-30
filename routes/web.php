@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,11 +16,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-Route::get('/admin', function(){
-    return view('admin.index');
-})->middleware(['auth', 'verified'])->name('admin');
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'all'])->name('admin'); 
+});
 Route::get('admin/category/index', [CategoryController::class, 'index'])->name('category');
 Route::get('admin/category/add', [CategoryController::class, 'create'])->name('add_category');
 Route::post('/add_cate', [CategoryController::class, 'store']);
@@ -33,6 +33,8 @@ Route::get('admin/news/edit/{id}', [NewsController::class, 'edit'])->name('edit_
 Route::post('/edit_news/{id}', [NewsController::class, 'update']);
 Route::get('admin/news/delete/{id}', [NewsController::class, 'destroy'])->name('delete_news');
 
+Route::get('admin/users/index', [AdminController::class, 'index'])->name('users');
+Route::get('admin/users/edit/{id}', [AdminController::class, 'edit'])->name('edit_users');
 
 
 Route::get('/home', [ViewController::class, 'index'])->name('home');
@@ -42,5 +44,6 @@ Route::get('/news/travel/', [ViewController::class, 'travel'])->name('travel');
 Route::get('/news/sport/', [ViewController::class, 'sport'])->name('sport');
 Route::get('/news/details/{id}/', [ViewController::class, 'details'])->name('details');
 Route::get('/search', [ViewController::class, 'search']);
+Route::post('/comment', [CommentController::class, 'store']);
 
 require __DIR__.'/auth.php';
