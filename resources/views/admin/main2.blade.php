@@ -283,5 +283,18 @@
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="{{asset('js/app.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Thành công',
+            text: '{{ session('success') }}',
+            timer: 3000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+        })
+    </script>
+@endif
 </body>
 </html>

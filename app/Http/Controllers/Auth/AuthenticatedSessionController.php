@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::user()->status === 'admin') {
             return redirect()->route('admin');
         } else {
-            return redirect()->route('home');
+            return redirect()->route('home')->with('success', 'Đăng nhập thành công');
         }
     }
 
@@ -45,6 +45,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Đăng xuất thành công');
     }
 }
