@@ -12,7 +12,7 @@
     @foreach ($items as $key)
     <div class="col-span-10">
        <div class="new" style="display: flex;">
-          <img src="{{ asset($key->hinh_anh) }}" width="150" style="height: 100px" alt="" style="padding-top: 7px;">
+          <img src="{{ asset('storage/'.$key->hinh_anh) }}" width="150" style="height: 100px" alt="" style="padding-top: 7px;">
           <div style="padding-left: 15px;">
              <a href="{{ url('news/details/' . $key->id) }}">
                 <strong>

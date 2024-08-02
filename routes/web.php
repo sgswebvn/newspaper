@@ -35,6 +35,7 @@ Route::get('admin/news/delete/{id}', [NewsController::class, 'destroy'])->name('
 
 Route::get('admin/users/index', [AdminController::class, 'index'])->name('users');
 Route::get('admin/users/edit/{id}', [AdminController::class, 'edit'])->name('edit_users');
+Route::get('admin/users/delete/{id}', [AdminController::class, 'destroy'])->name('delete_users');
 
 
 Route::get('/home', [ViewController::class, 'index'])->name('home');
@@ -44,6 +45,7 @@ Route::get('/news/travel/', [ViewController::class, 'travel'])->name('travel');
 Route::get('/news/sport/', [ViewController::class, 'sport'])->name('sport');
 Route::get('/news/details/{id}/', [ViewController::class, 'details'])->name('details');
 Route::get('/search', [ViewController::class, 'search']);
+Route::get('/search_admin', [NewsController::class, 'search']);
 Route::post('/comment', [CommentController::class, 'store']);
 
 require __DIR__.'/auth.php';

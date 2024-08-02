@@ -29,12 +29,14 @@
         </div>
         <div class="col-span-3 text-center">
             @foreach ($data->take(5) as $key)
+           <a href="{{ url('news/details/' . $key->id) }}">
             <div style="display: flex; border: 1px solid lightgray; padding: 5px;" class="rounded-md">
-                <img style="padding-top: 3px;" src="{{asset($key->hinh_anh)}}" width="100px" alt="11233123">
+                <img style="padding-top: 3px;" src="{{asset('storage/' .$key->hinh_anh)}}" width="100px" alt="11233123">
                 <strong align="start" class="text-gray-700" style="padding-left: 10px;">
                     {{$key->tieu_de}}
                 </strong>
             </div>
+           </a>
             <br>
             @endforeach
         </div>

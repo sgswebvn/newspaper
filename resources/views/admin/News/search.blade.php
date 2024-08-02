@@ -1,10 +1,11 @@
 @extends('admin.main2')
-@section('title', 'Tin tức')
+@section('title', 'Search')
 
 @section('main')
-<a href="{{route('add_news')}}" class="inline-block rounded-md bg-blue-500 px-6 py-2 text-white text-sm font-semibold shadow-sm ring-1 ring-blue-500 ring-inset hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Thêm tin tức</a>
 <br>
-<br>
+@if($items->isEmpty())
+    <h1 align="center">Tìm không ra bạn ơi </h1>
+@else
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -35,7 +36,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($news as $key)
+            @foreach ($items as $key)
             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                 <td class="px-6 py-4" align="center">
                     {{$key->id}}
@@ -65,6 +66,5 @@
         </tbody>
     </table>
 </div>
-
-
+@endif
 @endsection

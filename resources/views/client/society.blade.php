@@ -9,7 +9,7 @@
       <div class="col-span-9 border border-blue-200 p-4">
          <a href="{{ url('/news/details/' . $society[0]->id) }}">
             <div class="text-center mb-4">
-               <img src="{{ asset($society[0]->hinh_anh) }}" alt="Image" class="w-full h-auto">
+               <img src="{{ asset('storage/'.$society[0]->hinh_anh) }}" alt="Image" class="w-full h-auto">
             </div>
             <h2 class="text-2xl font-bold text-blue-800">
             {{ $society[0]->tieu_de }}
@@ -25,7 +25,7 @@
          @foreach ($society->slice(1)->take(4) as $keyy)
          <div class="border border-blue-200 p-4">
             <a href="{{ url('/news/details/' . $keyy->id) }}">
-               <img src="{{ asset($keyy->hinh_anh) }}" alt="Image" class="w-full h-48 object-cover mb-2">
+               <img src="{{ asset('storage/'.$keyy->hinh_anh) }}" alt="Image" class="w-full h-48 object-cover mb-2">
                <h3 class="text-lg font-semibold">
                {{ Str::limit($keyy->tieu_de, 44, '...') }}
                </h3>
@@ -54,7 +54,7 @@
 <div class="max-w-7xl mx-auto px-4 lg:px-8">
    @foreach ($news_society as $key)
    <div class="flex border border-gray-200 p-4 mb-4">
-      <img src="{{ asset($key->hinh_anh) }}" class="w-32 h-32 object-cover mr-4" alt="Image">
+      <img src="{{ asset('storage/'.$key->hinh_anh) }}" class="w-32 h-32 object-cover mr-4" alt="Image">
       <div>
          <a href="{{ url('news/details/' . $key->id) }}">
             <h4 class="text-lg font-semibold mb-2">

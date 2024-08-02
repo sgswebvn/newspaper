@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidateRq;
 use App\Models\Category;
 use Illuminate\Http\Request;
+
 
 class CategoryController extends Controller
 {
@@ -27,11 +29,9 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ValidateRq $request)
     {   
-        $request->validate([
-            'the_loai' => 'required|string|max:225',
-        ]);
+       
         Category::create([
             'the_loai' => $request->input('the_loai'),
         ]);
@@ -44,6 +44,7 @@ class CategoryController extends Controller
      */
     public function show()
     {
+        
     }
 
     /**

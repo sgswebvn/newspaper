@@ -47,6 +47,4 @@ class ViewController extends Controller
         $items = News::where('tieu_de', 'LIKE', '%' . $query .'%')->get();
         return view('client.search', compact('items', 'news_home'));
     }
-
-    
 }

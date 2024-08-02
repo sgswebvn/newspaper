@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ValidateRq;
 class NewsController extends Controller
 {
     /**
@@ -28,44 +30,30 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ValidateRq $request)
     {
-    
-            $request->validate($this->rules(), $this->message());
-            
-            $file = $request->file('hinh_anh');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $destinationPath = 'images/'; // Update this to your desired path
-            $file->move($destinationPath, $fileName);
 
-            News::create([
-                'tieu_de' => $request->input('tieu_de'),
-                'noi_dung' => $request->input('noi_dung'),
-                'hinh_anh' => $destinationPath . $fileName,
-                'tac_gia' => $request->input('tac_gia'),
-                'the_loai' => $request->input('the_loai'),
-            ]);
-            // dd($request);
-            return redirect('/admin/news/index')->with('success', 'Thêm thành công');
+        $fileName = null;
+        if ($request->hasFile('hinh_anh')) {
+            $file = $request->file('hinh_anh');
+            $fileName = $file->store('images', 'public'); // Store file in 'images' directory within 'public' disk
+        }
+
+        News::create([
+            'tieu_de' => $request->input('tieu_de'),
+            'noi_dung' => $request->input('noi_dung'),
+            'hinh_anh' => $fileName,
+            'tac_gia' => $request->input('tac_gia'),
+            'the_loai' => $request->input('the_loai'),
+        ]);
+
+        return redirect('/admin/news/index')->with('success', 'Thêm thành công');
     }
-    public function rules () {
-        return [
-            'tieu_de' => ['required', 'string' , 'min:10'],
-            'the_loai' => ['required', ],
-            'noi_dung' => ['required', 'string' ],
-            'hinh_anh' => ['required', 'image', 'mimes:png,jpeg,jpg,gif,svg, jgp.webp, webp', 'max:2048'],
-            'tac_gia' => ['required'],
-        ];
-    }
-    public function message() {
-        return [
-            'tieu_de.required' => 'Vui lòng nhập tiêu đề ',
-            'tieu_de.min' => 'Tối thiểu 10 chữ',
-            'noi_dung.required' => 'Không để trống nội dung',
-            'noi_dung.min' => 'Tối thiểu 30 chữ',
-            'hinh_anh.required' => 'Phải nhập hình ảnh',
-        ];
-    }
+
+    
+
+   
+
     /**
      * Display the specified resource.
      */
@@ -80,7 +68,7 @@ class NewsController extends Controller
     public function edit(string $id)
     {
         $categories = Category::all();
-        $news = News::findorFail($id);
+        $news = News::findOrFail($id);
         return view('admin.News.edit', compact('news', 'categories'));
     }
 
@@ -89,36 +77,48 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
-    $request->validate($this->rules(), $this->message());
+        $request->validate($this->rules(), $this->messages());
 
-    $news = News::findOrFail($id);
-    $news->tieu_de = $request->input('tieu_de');
-    $news->noi_dung = $request->input('noi_dung');
-    $news->tac_gia = $request->input('tac_gia');
-    $news->the_loai = $request->input('the_loai');
+        $news = News::findOrFail($id);
+        $news->tieu_de = $request->input('tieu_de');
+        $news->noi_dung = $request->input('noi_dung');
+        $news->tac_gia = $request->input('tac_gia');
+        $news->the_loai = $request->input('the_loai');
 
-    if ($request->hasFile('hinh_anh')) {
-        $file = $request->file('hinh_anh');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $destinationPath = 'images/';
-        $file->move($destinationPath, $fileName);
-        $news->hinh_anh = $destinationPath . $fileName;
+        if ($request->hasFile('hinh_anh')) {
+            // Delete old image if exists
+            if ($news->hinh_anh) {
+                Storage::disk('public')->delete($news->hinh_anh);
+            }
+
+            $file = $request->file('hinh_anh');
+            $fileName = $file->store('images', 'public');
+            $news->hinh_anh = $fileName;
+        }
+
+        $news->save();
+        return redirect('/admin/news/index')->with('success', 'Cập nhật thành công');
     }
-
-    $news->save();
-    return redirect('/admin/news/index')->with('success', 'Cập nhật thành công');
-
-}
-
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $news = News::findorFail($id);
+        $news = News::findOrFail($id);
+
+        // Delete image file from storage
+        if ($news->hinh_anh) {
+            Storage::disk('public')->delete($news->hinh_anh);
+        }
+
         $news->delete();
-        return redirect('admin/news/index')->with('Xóa thành công');
+        return redirect('/admin/news/index')->with('success', 'Xóa thành công');
+    }
+    function search(Request $request) {
+        $news = News::all();
+        $query = $request->input('query');
+        $items = News::where('tieu_de', 'LIKE', '%' . $query .'%')->get();
+        return view('admin.News.search', compact('items', 'news'));
     }
 }

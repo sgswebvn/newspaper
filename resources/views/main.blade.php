@@ -39,7 +39,7 @@
       <!-- Show user avatar and dropdown menu when the user is logged in -->
       <div class="relative">
         <button id="user-menu-button" class="flex items-center space-x-2 text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
-          <img src="{{ Auth::user()->avatar }}" alt="User Avatar" class="w-8 h-8 rounded-full">
+          <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="User Avatar" class="w-8 h-8 rounded-full">
           <span class="hidden md:inline">{{ Auth::user()->name }}</span>
         </button>
         <div id="user-menu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 hidden">
