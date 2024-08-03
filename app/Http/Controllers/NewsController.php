@@ -75,9 +75,8 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ValidateRq $request, string $id)
     {
-        $request->validate($this->rules(), $this->messages());
 
         $news = News::findOrFail($id);
         $news->tieu_de = $request->input('tieu_de');

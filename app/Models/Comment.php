@@ -25,4 +25,8 @@ class Comment extends Model
         ->where('news_id',$id)
         ->get();
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

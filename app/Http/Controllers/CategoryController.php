@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRq;
 use App\Models\Category;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 
@@ -60,11 +61,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ValidateRq $request, string $id)
     {
-        $request->validate([
-            'the_loai' => 'required|string',
-        ]);
         $categories = Category::findorFail($id);
 
         $categories->the_loai = $request->input('the_loai');

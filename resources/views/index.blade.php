@@ -61,7 +61,7 @@
             {{ $key->tieu_de }}
             </h4>
             <p class="text-gray-700">
-               {!! Str::limit($key->noi_dung, 450, '...') !!}
+               {!! Str::limit($key->noi_dung, 340, '...') !!}
             </p>
          </a>
       </div>

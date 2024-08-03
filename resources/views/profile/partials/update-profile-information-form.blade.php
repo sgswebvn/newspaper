@@ -1,4 +1,15 @@
 <section>
+    @if (session('status') === 'profile-updated')
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Cập nhật thành công!',
+            text: 'Thông tin hồ sơ của bạn đã được cập nhật.',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
+
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Thông tin người dùng') }}
@@ -22,11 +33,13 @@
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
+
         <div>
             <x-input-label for="avatar" :value="__('Avatar')" />
             <input type="file" id="avatar" name="avatar" class="mt-1 block w-full" accept="image/*">
             <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
         </div>
+
         <div>
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
                 {{ __('Ảnh đại diện ') }}
@@ -42,10 +55,8 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
-            
-        
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                         {{ __('Your email address is unverified.') }}
@@ -63,7 +74,6 @@
                 </div>
             @endif
         </div>
-    
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
@@ -80,3 +90,7 @@
         </div>
     </form>
 </section>
+<!-- Include SweetAlert CSS and JS -->
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.5/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.5/dist/sweetalert2.all.min.js"></script>
+

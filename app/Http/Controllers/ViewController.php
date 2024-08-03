@@ -35,7 +35,7 @@ class ViewController extends Controller
         return view('client.sport', compact('sport', 'news_sport'));
     }
     function details(string $id) {
-        $cmt= Comment::getcmt($id);
+        $cmt = Comment::where('news_id', $id)->with('user')->get();
         $news_home = DB::table('news')->select('*')->get();
         $data = News::all();
         $details = News::findorFail($id);
