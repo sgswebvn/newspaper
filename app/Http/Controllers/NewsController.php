@@ -44,8 +44,10 @@ class NewsController extends Controller
             'noi_dung' => $request->input('noi_dung'),
             'hinh_anh' => $fileName,
             'tac_gia' => $request->input('tac_gia'),
+            'description' => $request->input('description'),
             'the_loai' => $request->input('the_loai'),
         ]);
+
 
         return redirect('/admin/news/index')->with('success', 'Thêm thành công');
     }
@@ -82,8 +84,8 @@ class NewsController extends Controller
         $news->tieu_de = $request->input('tieu_de');
         $news->noi_dung = $request->input('noi_dung');
         $news->tac_gia = $request->input('tac_gia');
+        $news->description = $request->input('description');
         $news->the_loai = $request->input('the_loai');
-
         if ($request->hasFile('hinh_anh')) {
             // Delete old image if exists
             if ($news->hinh_anh) {

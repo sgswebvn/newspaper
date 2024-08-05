@@ -66,6 +66,7 @@
   </div>
 </nav>
 
+
 <hr>
 <x-guest-layout>
     <!-- Session Status -->

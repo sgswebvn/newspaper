@@ -27,6 +27,8 @@ class ValidateRq extends FormRequest
             'noi_dung' => ['required', 'string', 'min:30'],
             'hinh_anh' => ['required', 'image', 'mimes:png,jpeg,jpg,gif,svg,webp', 'max:2048'],
             'tac_gia' => ['required'],
+            'description' => ['required'],
+
         ];
        
     }
@@ -43,6 +45,7 @@ class ValidateRq extends FormRequest
             'hinh_anh.mimes' => 'Hình ảnh phải có định dạng png, jpeg, jpg, gif, svg, hoặc webp',
             'hinh_anh.max' => 'Kích thước hình ảnh không được vượt quá 2MB',
             'tac_gia.required' => 'Vui lòng nhập tên tác giả',
+            'description.required' => 'Vui lòng nhập mô t',
         ];
     }
 }

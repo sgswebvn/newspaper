@@ -12,10 +12,13 @@ class News extends Model
     protected $fillable = [
         'tieu_de', 'noi_dung',
         'hinh_anh', 'tac_gia',
-        'the_loai'
+        'the_loai', 'description'
     ];
 
     public function comments() {
         return $this->hasMany(Comment::class);
     }
+    protected $casts = [
+        'date_create' => 'datetime',
+    ];
 }

@@ -44,7 +44,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        
+        return redirect()->route('verification.notice')->with('success', 'Đăng ký thành công');
 
-        return redirect(route('/', absolute: false))->with('success', 'Đăng ký thành công');
     }
 }

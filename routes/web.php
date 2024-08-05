@@ -7,6 +7,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+
+
+
 
 Route::get('/', [ViewController::class, 'index'])->name('/');
 
@@ -48,5 +53,22 @@ Route::get('/news/details/{id}/', [ViewController::class, 'details'])->name('det
 Route::get('/search', [ViewController::class, 'search']);
 Route::get('/search_admin', [NewsController::class, 'search']);
 Route::post('/comment', [CommentController::class, 'store']);
+Route::resource('categories', CategoryController::class);
 
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+ 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+ 
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 require __DIR__.'/auth.php';

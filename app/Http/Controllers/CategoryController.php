@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRq;
 use App\Models\Category;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 
@@ -30,7 +29,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ValidateRq $request)
+    public function store(Request $request)
     {   
        
         Category::create([
@@ -38,14 +37,16 @@ class CategoryController extends Controller
         ]);
         // dd()
         return redirect('/admin/category/index/')->with('success', 'Thêm thành công');
-    }
+    }   
 
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Request $request)
     {
-        
+        $categories = Category::all();
+
+        return view('main', compact('categories'));
     }
 
     /**
@@ -61,8 +62,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ValidateRq $request, string $id)
+    public function update(Request $request, string $id)
     {
+        
         $categories = Category::findorFail($id);
 
         $categories->the_loai = $request->input('the_loai');

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->string('tac_gia');
             $table->unsignedBigInteger('the_loai');
             $table->timestamps();
+            $table->dateTime('date_create')->default(DB::raw('CURRENT_TIMESTAMP'))->change();
             $table->foreign('the_loai')->references('id')->on('categories')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }

@@ -56,7 +56,7 @@
                 </td>
 
                 <td class="px-6 py-4" align="center">
-                    <a href="{{route('delete_news', ['id' => $key->id])}}" class="inline-block rounded-md bg-blue-500 px-6 py-2 text-white text-sm font-semibold shadow-sm ring-1 ring-blue-500 ring-inset hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Xóa</a>
+                    <a href="{{route('delete_news', ['id' => $key->id])}}" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" class="inline-block rounded-md bg-blue-500 px-6 py-2 text-white text-sm font-semibold shadow-sm ring-1 ring-blue-500 ring-inset hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Xóa</a>
                     <a href="{{route('edit_news', ['id' => $key->id])}}" class="inline-block rounded-md bg-green-500 px-6 py-2 text-white text-sm font-semibold shadow-sm ring-1 ring-blue-500 ring-inset hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Sửa</a>
                 </td>
             </tr>
