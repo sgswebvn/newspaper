@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateRq;
 use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 
@@ -18,6 +19,7 @@ class CategoryController extends Controller
 
         return view('admin.Category.index', compact('categories'));
     }
+   
     /**
      * Show the form for creating a new resource.
      */
@@ -31,6 +33,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {   
+        $request->validate([
+            'the_loai' => 'required|string',
+        ]);
        
         Category::create([
             'the_loai' => $request->input('the_loai'),

@@ -45,6 +45,10 @@
         <div id="user-menu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 hidden">
           <ul class="py-1 text-sm text-gray-900 dark:text-white">
             <li><a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">Quản lý tài khoản</a></li>
+            <li><a href="{{ route('abouts') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">Giới thiệu</a></li>
+            <li><a href="{{ route('contact')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">Liên hệ</a></li>
+          
+
             <li>
               <a href="{{ route('logout') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
@@ -94,7 +98,48 @@
     @yield('main')
 </main>
 
-@yield('footer')
+@section('footer')
+<footer class="text-dark py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
+          <!-- About Section -->
+          <div class="flex-1 text-center md:text-left">
+              <h3 class="text-xl font-semibold mb-4">Về Chúng Tôi</h3>
+              <p class=" text-gray-800 text-sm leading-relaxed">Chúng tôi cung cấp những tin tức mới nhất <br> và chính xác về đời sống, du lịch, xã hội và <br> thể thao. Theo dõi chúng tôi để cập nhật <br> thông tin nhanh chóng và dễ dàng.</p>
+          </div>
+
+          <!-- Links Section -->
+          <div class="flex-1 text-center md:text-left">
+              <h3 class="text-xl font-semibold mb-4">Liên Kết</h3>
+              <ul class="space-y-2">
+                  <li><a href="#" class="text-gray-800 transition-colors duration-300">Trang chủ</a></li>
+                  <li><a href="#" class=" text-gray-800  transition-colors duration-300">Đời sống</a></li>
+                  <li><a href="#" class=" text-gray-800   transition-colors duration-300">Du lịch</a></li>
+                  <li><a href="#" class=" text-gray-800   transition-colors duration-300">Xã hội</a></li>
+                  <li><a href="#" class=" text-gray-800   transition-colors duration-300">Thể thao</a></li>
+              </ul>
+          </div>
+
+          <!-- Contact Section -->
+          <div class="flex-1 text-center md:text-left">
+              <h3 class="text-xl font-semibold mb-4">Liên Hệ</h3>
+              <p class=" text-gray-800 text-sm mb-2">Email: <a href="mailto:info@example.com" class="text-blue-400 hover:text-blue-300 transition-colors duration-300">info@example.com</a></p>
+              <p class=" text-gray-800 text-sm mb-2">Số điện thoại: <a href="tel:+123456789" class="text-blue-400 hover:text-blue-300 transition-colors duration-300">+123 456 789</a></p>
+              <div class="flex justify-center md:justify-start mt-2 space-x-4">
+                  <a href="#" class=" text-gray-800   transition-colors duration-300"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#" class=" text-gray-800   transition-colors duration-300"><i class="fab fa-twitter"></i></a>
+                  <a href="#" class=" text-gray-800   transition-colors duration-300"><i class="fab fa-instagram"></i></a>
+              </div>
+          </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+          <span class="text-sm">© 2024 <a href="#" class="  transition-colors duration-300">Hiếu Trương</a>. All rights reserved.</span>
+      </div>
+  </div>
+</footer>
+@
 
 <script>
   // Toggle user menu visibility

@@ -199,33 +199,6 @@ h2, h3, h4 {
 <br>
 <br>
 @endsection
-
-@section('footer')
-<footer class="bg-light rounded-lg shadow dark:bg-gray-900 m-4">
-  <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-      <div class="sm:flex sm:items-center sm:justify-between">
-          <a href="" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Trang chủ</span>
-          </a>
-          <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-              <li>
-                  <a href="#" class="hover:underline me-4 md:me-6">Đời sống</a>
-              </li>
-              <li>
-                  <a href="#" class="hover:underline me-4 md:me-6">Du lịch</a>
-              </li>
-              <li>
-                  <a href="#" class="hover:underline me-4 md:me-6">Xã hội</a>
-              </li>
-              <li>
-                  <a href="#" class="hover:underline">Thể thao</a>
-              </li>
-          </ul>
-      </div>
-      <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-      <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="" class="hover:underline">Hiếu Trương</a></span>
-  </div>
-</footer>
-@endsection
+@yield('footer')
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="{{ asset('css/news-details.css') }}" rel="stylesheet">

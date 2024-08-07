@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
         
-        return redirect()->route('verification.notice')->with('success', 'Đăng ký thành công');
+        return redirect()->route('verification.notice');
 
     }
 }

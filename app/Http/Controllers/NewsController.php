@@ -31,8 +31,11 @@ class NewsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(ValidateRq $request)
-    {
-
+    {   
+        $request->validate([
+            'hinh_anh' => 'required|string',
+        ]);
+       
         $fileName = null;
         if ($request->hasFile('hinh_anh')) {
             $file = $request->file('hinh_anh');
@@ -87,7 +90,6 @@ class NewsController extends Controller
         $news->description = $request->input('description');
         $news->the_loai = $request->input('the_loai');
         if ($request->hasFile('hinh_anh')) {
-            // Delete old image if exists
             if ($news->hinh_anh) {
                 Storage::disk('public')->delete($news->hinh_anh);
             }

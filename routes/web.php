@@ -53,7 +53,10 @@ Route::get('/news/details/{id}/', [ViewController::class, 'details'])->name('det
 Route::get('/search', [ViewController::class, 'search']);
 Route::get('/search_admin', [NewsController::class, 'search']);
 Route::post('/comment', [CommentController::class, 'store']);
-Route::resource('categories', CategoryController::class);
+
+Route::get('/abouts/', [ViewController::class, 'abouts'])->name('abouts');
+Route::get('/contact/', [ViewController::class, 'contact'])->name('contact');
+Route::post('/contact', [ViewController::class, 'store']);
 
 
 Route::get('/email/verify', function () {
@@ -72,3 +75,4 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 require __DIR__.'/auth.php';
+

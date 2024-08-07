@@ -25,8 +25,8 @@ class ValidateRq extends FormRequest
             'tieu_de' => ['required', 'string', 'min:10'],
             'the_loai' => ['required'],
             'noi_dung' => ['required', 'string', 'min:30'],
-            'hinh_anh' => ['required', 'image', 'mimes:png,jpeg,jpg,gif,svg,webp', 'max:2048'],
-            'tac_gia' => ['required'],
+            // 'hinh_anh' => ['nullable','required', 'image', 'mimes:png,jpeg,jpg,gif,svg,webp', 'max:2048'],
+            'tac_gia' => ['required', 'nullable'],
             'description' => ['required'],
 
         ];

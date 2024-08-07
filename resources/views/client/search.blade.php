@@ -34,3 +34,4 @@
 <br>
 @endif
 @endsection
+@yield('footer')
