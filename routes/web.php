@@ -41,6 +41,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/users/edit/{id}', [AdminController::class, 'edit'])->name('edit_users');
     Route::get('admin/users/delete/{id}', [AdminController::class, 'destroy'])->name('delete_users');
 
+    Route::get('admin/comment/index', [AdminController::class, 'comment'])->name('comment');
+    Route::get('news/details/comment/{id}', [AdminController::class, 'show'])->name('show'); 
 });
 
 
@@ -74,5 +76,6 @@ Route::post('/email/verification-notification', function (Request $request) {
  
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 require __DIR__.'/auth.php';
 

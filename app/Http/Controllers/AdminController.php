@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -25,8 +24,13 @@ class AdminController extends Controller
       $users = User::findorFail($id);
       $users->delete();
       return redirect('/admin/users/index/')->with('success', 'Xóa thành công');
-
    }
+
+   public function comment() {
+      $comment = DB::table('comments')->select('*')->get();
+      return view('admin.comment.index', compact('comment'));
+   }
+   
   
 
 

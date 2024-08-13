@@ -62,6 +62,9 @@
                     <li class="mb-4">
                         <a href="{{route('category')}}" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Danh mục</a>
                     </li> 
+                    <li class="mb-4">
+                        <a href="{{route('comment')}}" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Bình luận</a>
+                    </li> 
                 </ul>
             </li>
             <li class="mb-1 group">

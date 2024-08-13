@@ -52,7 +52,7 @@ class CommentController extends Controller
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -60,7 +60,21 @@ class CommentController extends Controller
     {
         //
     }
-
+   
+        public function togglestatus(Request $request, $id)
+        {
+            $comment = Comment::find($id);
+    
+            if ($comment) {
+                $comment->status = $request->input('status');
+                $comment->save();
+    
+                return response()->json(['success' => true, 'message' => 'status updated successfully.']);
+            }
+    
+            return response()->json(['success' => false, 'message' => 'Comment not found.']);
+        }
+    
     /**
      * Update the specified resource in storage.
      */
